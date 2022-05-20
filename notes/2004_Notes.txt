@@ -1,0 +1,50 @@
+Abstract:
+由ATN攻击目标
+目标：一个能模仿Time-series Model的纯净模型
+种类：1-NN DTW & FCN
+之前的研究都是单变量，首创多变量
+
+Introduction:
+1. 讲了时间序列的用途和别种模型会被怎么攻击
+2. 对DNN视觉模型的攻击：梯度信息
+时间序列传统模型类似黑盒模型，很难提取梯度信息
+如果梯度信息容易被找到，就会对白盒攻击很脆弱
+3.攻击方法：
+标准模型=student
+target=teacher
+student去approximate teacher的output
+我们称这为一次对student模型的训练，与此同时使用ATN进行攻击
+
+Background and related works:
+A. Time Series Classifiers
+1. M 1-NN DTW 由于多个时间序列长度不一定相同，DTW可以用来计算非等长时间序列的相似度。
+2. 全卷积网络
+
+B. ATN
+gf(x) 生成针对f的adversarial sample，讲述loss function 的构成
+reranking function 可以让所有yk<yt
+
+C. Transferability Property
+依靠近似输入输出来训练目标模型的替身，训练完成后用来生成adversarial samples.
+
+D. Knowledge Distillation
+通过最小化loss function, 知识从教师模型到学生模型被提纯了
+意为：对于某些案例，正确的分类更接近1，其余分类接近0
+
+3. Methodology
+A. GATN: 使用梯度信息生成adversarial sample
+
+B. 黑白盒限制：黑盒：无法接触time series classifier或dataset, 且只能利用输出的预测标签
+对于一个数据集D，分为训练集 和 评估集（包含测试集）但GATN永远无法利用目标模型所使用的数据集 所以D应该为任何目标都没有训练过的训练集，因此得到的预测标签就可以被利用了
+
+C. 训练方法
+reranking function 影响很多。
+独热编码->无法排序分类、取得相对少曲解的adversaries
+黑盒攻击苦手
+使用distillation，用一个数据集获得分类和可能性分布。
+设定gating parameter去决定模仿老师和从hard label loss 学习的比重。
+白盒攻击0.5
+黑盒攻击1
+
+Conclusion
+第一次使用ATN来攻击M-TSM获得了成功

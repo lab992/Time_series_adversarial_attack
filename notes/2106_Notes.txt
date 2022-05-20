@@ -1,0 +1,41 @@
+Abstarct:
+时间序列预测在很多现实场景中有用，但对adversarial attack 很脆弱。
+手段（攻击策略）：添加极其微小的数据扰动（基于梯度信息）
+对象：最新水平的模型， 三组数据集
+目标：降低预测准确性
+
+1.Introduction:
+1：预测手段：分析现有数据，根据development, direction, trend 去得出analogy or extention.
+2:  提到了三种传统模型 ，因为数据量和计算资源的提升，开始使用深度学习。（预测更精确）
+3：介绍了adversarial attack 的发展历程（尤其是图像方面）
+4：提出两种前人的攻击：Fawaz增加微小扰动，Karim使用ATN
+5：关键：如何让扰动尽可能地小。本篇文章：使用梯度信息来增加扰动，并提出了对于最高效的扰动的测量。
+
+2.2.Framework:
+攻击的三部分：adversarial time
+series generator, adversarial attack and transferable attack.
+
+3.1.LSTNet Model:
+分为四层：convolutional layer, recurrent layer, recurrent-skip layer, fully connected layer
+convolutional layer(卷积层)：压缩局部特征->更好的性能表现
+key: local feature
+recurrent layer(循环层)：长期依赖->获得全局规格->增强预测表现
+key: global pattern
+recurrent-skip layer: 时间序列的周期性->便于优化->获得超长依赖的规格
+
+重点：3.2 Adversarial Time series Generator
+介绍了SGD（随机梯度下降）
+概括了优化问题（argmaxJ(X,Y)）
+为了增大Loss function,我们从梯度下降变成梯度上升
+不断累计这样的误差，最终导致预测错误。
+
+3.3 Adversarial Sample Importance Measure
+原因：由于feature importance ranking， 只有重要的adversarial sample能扰乱系统
+target y 的误差越大 扰乱的^x的重要性越大
+
+4.Expreiments
+使用三个数据集， CNN,RNN,LSTNet,MHANet作为攻击对象， RSE,RAE,CORR作为指标，5个不同参数(见Algo1)
+
+5.Conclusion
+介绍了攻击方法
+提出了对adversarial sample importance的评估

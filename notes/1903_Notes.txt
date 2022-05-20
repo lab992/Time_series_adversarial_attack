@@ -1,0 +1,55 @@
+Abstract:
+TSC是数据挖掘经常遭遇的问题，但是还没有人做过关于有关TSC模型对于adversarial time series examples 脆弱性的研究。(原因)
+鉴于对于图像模型的成功攻击，作者选用现有的攻击技术（增加noise）
+目的：为了证明现有的（2019）的模型对于adversarial attack 很脆弱。
+
+Introduction:
+梯度方法
+举了个咖啡豆的例子
+论文重点：转用对于图像的adversarial attack来攻击时间序列。
+	TSC很脆弱
+	针对一种网络结构的adversaraial可以转换到别的结构。
+	几种增加鲁棒性的手段。
+
+Background:
+定义
+A. Deep learning for time series classification
+deep neural network的应用：医疗方面、能源消耗、恶意程序检测、道路异常。
+
+B. Adversarial attacks
+该攻击在图像和自然语言处理的效果。
+之前在KNN分类器上的攻击（过时）
+
+Adversarial attacks for time series:
+使用ResNet和两种攻击方式。
+A. Residual Network
+使用ResNet的原因：使用的数据集多达85个，且结果与最新的分类器合集（35个分类器）相差不大。
+adversarial examples 可转移：黑盒攻击。
+输入：T长度的Time seires
+输出：拥有K个分类的可能性分布
+每一层有分类器，经过分类器后会得到一个数字，加入TS使TS变成多变量TS。经过十层后在GAP里平均，最终数字再分配到不同的class里。
+
+B. Fast Gradient Sign Method
+
+C. Basic Iterative Method
+FGSM的升级版，可以通过迭代使得扰动更加接近于原数值，更能让模型结果出错。
+
+Results:
+B. Results on the whole UCR archive
+BIM的攻击效果比FGSM显著很多。
+但是FGSM要快很多（不需要迭代）。
+攻击失败的案例：两个原因。
+1.六个最难攻击的数据集之一：太小的扰动很难让分类器改变决定。
+2.数列太短。
+
+C. Multi-Dimensional Scaling
+用这种方法体现了扰动和准确率下降的关系。
+
+D. E. F 对食品产业、车辆传感器、电能消耗的攻击。
+
+G. Transferability of adversarial examples
+对FCN进行了攻击，准确率显著下降了，证明了可转移性。
+
+H. 如何预防？
+1. 鉴别被扰动的数据
+2. 增加鲁棒性（通过对抗训练）
