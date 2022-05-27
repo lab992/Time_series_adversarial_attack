@@ -1,0 +1,13 @@
+Introduction:
+IoT数据的重要性
+novel risks->safety, privacy, security.
+adversarial sample 对于vector machine, logistic regression, decision tree, deep neural network是transferable的。
+AI算法安全没什么人研究 <- 模型的高维线性设计
+
+3
+3.1 快速梯度&TSC adversarial attack
+3.5 Class Activation Map 可以找到时间序列易受影响的地方
+
+4 proposed method
+分为两部分：encode-decode model和traditional deep neural network model for classification.
+ed-model: 输入是由thermometer encoding method得到的原始数据，输出是原始数据。Thermometer encoding method由于可以把数据转换成非线性的，因此可以移除由线性梯度生成的噪音和干扰
