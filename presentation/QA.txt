@@ -1,0 +1,17 @@
+black-box 
+	transfer-based attacks.
+substitute model, possibly being as much similar as possible to the target model, which have a probability to fool black-box models based on the transferability. 
+
+	score-based attacks
+The only knowledge about the attacked model are the input images and the relative output confidence scores. Anyway, the gradient can still be estimated by querying the target model and retrieving the labels’ confidence score.
+
+	decision-based attacks
+Under this settings, the only knowledge the attacker has about the model are only discrete hard-label predictions.
+
+ Skeleton-based Activity Recognition
+
+(1) augmenting the training data with adversarial examples, 
+(2)leveraging randomness to defend against adversarial attacks,
+(3) removing adversarial perturbations
+with projection, and 
+(4) detecting the adversarial examples instead of classifying them correctly.
